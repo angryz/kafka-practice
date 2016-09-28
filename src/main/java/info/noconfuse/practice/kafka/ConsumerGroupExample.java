@@ -15,6 +15,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * https://cwiki.apache.org/confluence/display/KAFKA/Consumer+Group+Example
+ *
  * @author Zheng Zhipeng
  */
 public class ConsumerGroupExample {
