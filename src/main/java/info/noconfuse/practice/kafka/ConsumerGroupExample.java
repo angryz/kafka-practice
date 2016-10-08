@@ -1,6 +1,5 @@
 package info.noconfuse.practice.kafka;
 
-import kafka.consumer.Consumer;
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
@@ -66,8 +65,12 @@ public class ConsumerGroupExample {
         Properties prop = new Properties();
         prop.put("zookeeper.connect", zookeeper);
         prop.put("group.id", groupId);
-        prop.put("zookeeper.session.timeout.ms", "400");
+        prop.put("zookeeper.session.timeout.ms", "500");
         prop.put("zookeeper.sync.time.ms", "200");
+        prop.put("auto.offset.reset", "largest"); // if offset is out of range, then reset the
+        // offset to the largest offset
+        //prop.put("auto.commit.enable", "false"); // disable auto commit, zookeeper won't create
+        // /consumers/group-name/offsets/topic-name/partition-num node
         prop.put("auto.commit.interval.ms", "1000");
         return new ConsumerConfig(prop);
     }
@@ -105,7 +108,7 @@ public class ConsumerGroupExample {
         example.run(threads);
 
         try {
-            Thread.sleep(15000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
 
         }
